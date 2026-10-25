@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SetEdit | RAM Artırma ve Performans Optimizasyonu</title>
+  <meta name="description" content="Samsung, iPhone, Redmi ve diğer cihazlar için RAM artırma, hafıza optimizasyonu, ADB komutları ve performans artırma rehberi." />
+  <style>
+    :root{
+      --bg:#09111d;
+      --bg2:#101d32;
+      --panel:#12213b;
+      --panel2:#182a48;
+      --card:#102340;
+      --card-2:#142d4d;
+      --line:rgba(255,255,255,.08);
+      --text:#edf5ff;
+      --muted:#b5c5dc;
+      --primary:#66d9ff;
+      --primary-2:#90ebff;
+      --green:#7ef0b0;
+      --gold:#ffc857;
+      --red:#ff6b6b;
+      --shadow:0 18px 42px rgba(0,0,0,.28);
+      --radius:20px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family:Segoe UI, Arial, sans-serif;
+      background:linear-gradient(180deg, #09111d 0%, #0c1425 30%, #0d182a 100%);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    a{ color:var(--primary); text-decoration:none; }
+    img{ max-width:100%; display:block; }
+
+    .container{ width:min(1200px, calc(100% - 30px)); margin:0 auto; }
+
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:blur(12px);
+      background:rgba(9,17,29,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:18px 0; gap:16px;
+    }
+
+    .brand{
+      font-size:1.18rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      color:#fff;
+    }
+
+    .menu{
+      display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+      color: var(--muted); font-size:.92rem;
+    }
+
+    .menu a{ color:var(--muted); transition:.2s ease; }
+    .menu a:hover{ color:var(--primary); }
+
+    .hero{ padding:72px 0 36px; }
+
+    .hero-grid{
+      display:grid; grid-template-columns:1.2fr .8fr; gap:26px; align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(102,217,255,.12);
+      border:1px solid rgba(102,217,255,.25);
+      color:var(--primary);
+      font-size:.72rem;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    h1{
+      font-size:clamp(2.4rem, 5vw, 4.2rem);
+      line-height:1.05;
+      letter-spacing:-.04em;
+      margin:18px 0 16px;
+    }
+
+    .lead{
+      color:var(--muted);
+      font-size:1.06rem;
+      max-width:720px;
+    }
+
+    .cta{
+      display:flex; gap:12px; flex-wrap:wrap; margin-top:24px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:13px 20px;
+      border-radius:12px;
+      font-weight:700;
+      transition:.2s ease;
+      border:1px solid transparent;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, #66d9ff, #7ef0b0);
+      color:#09131f;
+      box-shadow:var(--shadow);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:var(--text);
+    }
+
+    .hero-card{
+      background:linear-gradient(180deg, rgba(23,43,70,.95), rgba(15,25,39,.96));
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .mini-stat{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:16px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+
+    .mini-stat:last-child{ border-bottom:none; }
+
+    .mini-stat strong{
+      display:block;
+      font-size:1.45rem;
+      margin-top:6px;
+    }
+
+    .pill{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:.7rem;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      border:1px solid rgba(126,240,176,.2);
+      background:rgba(126,240,176,.08);
+      color:var(--green);
+    }
+
+    .badge{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:9px;
+      font-size:.75rem;
+      font-weight:700;
+      border:1px solid transparent;
+    }
+
+    .badge.good{
+      background:rgba(126,240,176,.08);
+      border-color:rgba(126,240,176,.2);
+      color:var(--green);
+    }
+
+    .badge.warn{
+      background:rgba(255,202,90,.08);
+      border-color:rgba(255,202,90,.2);
+      color:var(--gold);
+    }
+
+    .badge.bad{
+      background:rgba(255,107,107,.08);
+      border-color:rgba(255,107,107,.2);
+      color:var(--red);
+    }
+
+    section{ padding:32px 0; }
+
+    .section-head{ margin-bottom:22px; }
+
+    .section-head h2{
+      margin:0 0 8px;
+      font-size:clamp(1.9rem, 3vw, 2.9rem);
+      letter-spacing:-.03em;
+    }
+
+    .section-head p{ margin:0; color:var(--muted); }
+
+    .grid-4{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(220px, 1fr));
+      gap:18px;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(18,33,59,.97), rgba(9,17,29,.97));
+      border:1px solid var(--line);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .card-head{ padding:18px 18px 8px; }
+    .card-head h3{ margin:0; font-size:1.18rem; }
+    .card-body{ padding:18px; }
+
+    .tag{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:.72rem;
+      font-weight:700;
+      letter-spacing:.04em;
+      margin-bottom:12px;
+      border:1px solid transparent;
+    }
+
+    .tag.primary{
+      background:rgba(102,217,255,.1);
+      color:var(--primary);
+      border-color:rgba(102,217,255,.2);
+    }
+    .tag.green{
+      background:rgba(126,240,176,.1);
+      color:var(--green);
+      border-color:rgba(126,240,176,.2);
+    }
+    .tag.gold{
+      background:rgba(255,202,90,.08);
+      color:var(--gold);
+      border-color:rgba(255,202,90,.2);
+    }
+
+    .code{
+      background:#091724;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:14px;
+      padding:14px 16px;
+      white-space:pre-wrap;
+      word-break:break-word;
+      color:#ebf5ff;
+      font-family:Consolas, monospace;
+      font-size:.87rem;
+      line-height:1.55;
+      margin-top:8px;
+    }
+
+    .checklist{ list-style:none; padding:0; margin:14px 0 0; }
+    .checklist li{
+      display:flex; align-items:flex-start; gap:10px; color:var(--muted); margin-bottom:8px;
+    }
+    .checklist li::before{
+      content:"✓"; color:var(--green); font-weight:900; line-height:1.2;
+    }
+
+    .device-tabs{
+      display:flex; flex-wrap:wrap; gap:10px; margin-bottom:18px;
+    }
+
+    .tab-btn{
+      padding:11px 16px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .tab-btn.active{
+      background:linear-gradient(135deg, rgba(102,217,255,.18), rgba(126,240,176,.12));
+      border-color:rgba(102,217,255,.25);
+      color:var(--text);
+    }
+
+    .tab-panel{ display:none; animation: fade .3s ease; }
+    .tab-panel.active{ display:block; }
+
+    @keyframes fade{ from{ opacity:0; transform: translateY(8px); } to{ opacity:1; transform: translateY(0); } }
+
+    .highlight{
+      background:linear-gradient(180deg, rgba(17,27,42,.9), rgba(13,19,28,.9));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .steps{ display:grid; grid-template-columns:repeat(4, minmax(210px, 1fr)); gap:18px; }
+    .step{
+      padding:20px;
+      background:linear-gradient(180deg, rgba(18,33,59,.95), rgba(11,18,28,.96));
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .step-num{
+      width:32px; height:32px;
+      display:grid; place-items:center;
+      border-radius:50%;
+      background:rgba(102,217,255,.12);
+      border:1px solid rgba(102,217,255,.2);
+      color:var(--primary);
+      font-weight:800;
+      margin-bottom:12px;
+    }
+
+    .step h3{ margin:0 0 10px; font-size:1.08rem; }
+    .step p{ margin:0; color:var(--muted); }
+
+    .table-wrap{
+      background:linear-gradient(180deg, rgba(19,31,49,.95), rgba(12,18,28,.98));
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    table{ width:100%; border-collapse:collapse; }
+    th, td{ padding:16px 18px; border-bottom:1px solid rgba(255,255,255,.05); vertical-align:top; text-align:left; }
+    thead th{
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    tbody tr:last-child td{ border-bottom:none; }
+
+    .faq{ display:grid; grid-template-columns:repeat(2, minmax(260px,1fr)); gap:18px; }
+    .faq-item{
+      background:rgba(18,33,59,.95);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+    }
+    .faq-item h3{ font-size:1.08rem; margin:0 0 8px; }
+    .faq-item p{ margin:0; color:var(--muted); }
+
+    footer{ padding:36px 0 70px; color:var(--muted); font-size:.92rem; }
+
+    @media (max-width: 900px){
+      .hero-grid{ grid-template-columns:1fr 1fr; }
+      .grid-4{ grid-template-columns:repeat(2, minmax(220px, 1fr)); }
+      .steps{ grid-template-columns:repeat(2, minmax(220px,1fr)); }
+      .faq{ grid-template-columns:1fr 1fr; }
+    }
+
+    @media (max-width: 680px){
+      nav{ flex-direction:column; }
+      .hero-grid, .grid-4, .steps, .faq{ grid-template-columns:1fr; }
+      .cta{ flex-direction:column; }
+      .btn{ width:100%; text-align:center; }
+      .menu{ justify-content:center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">SETEDIT</div>
+        <div class="menu">
+          <a href="#overview">Genel</a>
+          <a href="#devices">Cihazlar</a>
+          <a href="#steps">Adımlar</a>
+          <a href="#results">Sonuçlar</a>
+          <a href="#faq">SSS</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="overview">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">RAM OPTİMİZASYONU</span>
+          <h1>Samsung, iPhone, Redmi ve diğer cihazlar için tüm komutlar + sonuçlar</h1>
+          <p class="lead">
+            Fiziksel RAM artırma mümkün değildir. Ama gereksiz uygulamaları kapatmak,
+            arka plan yükünü düşürmek, önbelleği temizlemek, animasyonları azaltmak ve sistem ayarlarını optimize etmek
+            ile cihazınız daha akıcı ve daha hafif çalıştırılabilir.
+          </p>
+
+          <div class="cta">
+            <a href="#results" class="btn btn-primary">Sonuçları Gör</a>
+            <a href="#devices" class="btn btn-secondary">Komutları İncele</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="mini-stat">
+            <div>
+              <span class="pill">Gerçek</span>
+              <strong>RAM Artışı</strong>
+            </div>
+            <span class="badge bad">Mümkün Değil</span>
+          </div>
+          <div class="mini-stat">
+            <div>
+              <span class="pill">Verim</span>
+              <strong>Performans</strong>
+            </div>
+            <span class="badge good">Artar</span>
+          </div>
+          <div class="mini-stat">
+            <div>
+              <span class="pill">Temizlik</span>
+              <strong>Önbellek</strong>
+            </div>
+            <span class="badge warn">Önerilir</span>
+          </div>
+          <div class="mini-stat">
+            <div>
+              <span class="pill">Netice</span>
+              <strong>Akıcılık</strong>
+            </div>
+            <span class="badge good">Yükselir</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="devices">
+      <div class="section-head">
+        <h2>Cihaz seçimi</h2>
+        <p>Her cihaz için özel yöntemler ve komutlar.</p>
+      </div>
+
+      <div class="device-tabs">
+        <button class="tab-btn active" data-tab="samsung">Samsung</button>
+        <button class="tab-btn" data-tab="iphone">iPhone</button>
+        <button class="tab-btn" data-tab="redmi">Redmi</button>
+        <button class="tab-btn" data-tab="other">Diğer</button>
+      </div>
+
+      <div class="tab-panel active" id="samsung-panel">
+        <div class="grid-4">
+          <article class="card">
+            <div class="card-head">
+              <h3>Samsung ADB Temizliği</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag primary">Android</span>
+              <div class="code">adb shell settings put global transition_animation_scale 0
+adb shell settings put global window_animation_scale 0
+adb shell settings put global animator_duration_scale 0
+adb shell pm trim-caches 10000
+adb shell am force-stop com.google.android.apps.messaging
+adb shell am force-stop com.android.vending</div>
+              <ul class="checklist">
+                <li>Animasyonlar düşer.</li>
+                <li>Önbellek temizlenir.</li>
+                <li>Arka plan yükü azalır.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Gereksiz Uygulama Kaldırma</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag green">Temizleme</span>
+              <div class="code">adb shell pm uninstall --user 0 com.samsung.android.app.watchmanager
+adb shell pm uninstall --user 0 com.samsung.android.app.routines
+adb shell pm uninstall --user 0 com.sec.android.app.popupcalculator</div>
+              <ul class="checklist">
+                <li>Yüksek kaynak tüketen uygulamalar kaldırılır.</li>
+                <li>RAM kullanımında düşüş oluşur.</li>
+                <li>Uygulama açılışı hızlanır.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Gözlem / İzleme</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag gold">Analiz</span>
+              <div class="code">adb shell dumpsys meminfo com.android.systemui
+adb shell dumpsys activity activities | findstr "mResumed"
+adb shell top -n 1</div>
+              <ul class="checklist">
+                <li>Yüksek RAM kullanan uygulama bulunur.</li>
+                <li>Yavaşlama sebebi netleşir.</li>
+                <li>Doğru girişim belirlenir.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Samsung Netice</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag primary">Sonuç</span>
+              <div class="code">Sonuç:
+- animasyonlar azalır
+- RAM baskısı düşer
+- uygulama açılışı hızlanır
+- genel akıcılık artar</div>
+              <ul class="checklist">
+                <li>Net performans artışı olur.</li>
+                <li>Uzun süreli kullanım için kontrollü uygulama gerekir.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="iphone-panel">
+        <div class="grid-4">
+          <article class="card">
+            <div class="card-head">
+              <h3>Temel iPhone Ayarları</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag primary">iOS</span>
+              <div class="code">Ayarlar > Genel > Arka Plan Uygulama Yenilenmesi > Kapat
+Ayarlar > Pil > Düşük Güç Modu > Aç
+Ayarlar > Genel > iPhone Depolama > Gereksiz uygulamaları sil</div>
+              <ul class="checklist">
+                <li>Arka plan yenileme kapatılır.</li>
+                <li>Hafıza baskısı düşer.</li>
+                <li>Akıcılık artar.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Depolama Temizliği</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag green">Yönetim</span>
+              <div class="code">Ayarlar > Genel > iPhone Depolama
+- gereksiz oyunlar sil
+- büyük dosyalar buluta aktar
+- videoları ve fotoğrafları temizle</div>
+              <ul class="checklist">
+                <li>Önbellek yükü azalır.</li>
+                <li>Depolama düzenlenir.</li>
+                <li>Uygulamalar daha hızlı açılır.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Performans Dengeleme</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag gold">Ayarlar</span>
+              <div class="code">Ayarlar > Genel > Hızlandırılmış Uygulama Geliştirme > Kapalı
+Ayarlar > Genel > Yenileme > Kapat
+Ayarlar > Pil > Oto-Lock > Kısa</div>
+              <ul class="checklist">
+                <li>İşlemci yükü azalır.</li>
+                <li>Günlük kullanım daha akıcı olur.</li>
+                <li>Enerji tüketimi düşer.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>iPhone Netice</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag primary">Sonuç</span>
+              <div class="code">Sonuç:
+- fiziksel RAM artmaz
+- sistem yükü azalır
+- daha az yavaşlama olur
+- akıcı kullanım sağlanır</div>
+              <ul class="checklist">
+                <li>Fiziksel RAM artışı yoktur.</li>
+                <li>Performans optimize edilir.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="redmi-panel">
+        <div class="grid-4">
+          <article class="card">
+            <div class="card-head">
+              <h3>Redmi ADB Optimizasyon</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag primary">Android</span>
+              <div class="code">adb shell settings put global transition_animation_scale 0
+adb shell settings put global window_animation_scale 0
+adb shell settings put global animator_duration_scale 0
+adb shell pm trim-caches 12000
+adb shell am force-stop com.miui.miservice
+adb shell am force-stop com.miui.securitycenter</div>
+              <ul class="checklist">
+                <li>Animasyonlar düşer.</li>
+                <li>Yüksek kaynaklı servisler durdurulur.</li>
+                <li>Günlük kullanım daha hızlı olur.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Arka Plan Kısıtlaması</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag green">Kontrol</span>
+              <div class="code">Ayarlar > Uygulamalar > Uygulama Yöneticisi
+- gereksiz uygulamalar > duraklat
+- otomatik başlatma > kapat
+- arka plan kullanım > kısıtla</div>
+              <ul class="checklist">
+                <li>RAM baskısı azalır.</li>
+                <li>Uygulama açılışı hızlanır.</li>
+                <li>Arka plan yükü düşer.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Redmi Netice</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag gold">Sonuç</span>
+              <div class="code">Sonuç:
+- sistem daha akıcı çalışır
+- uygulama başlatma süresi azalır
+- hafıza serbestleşir
+- arka plan yükü düşer</div>
+              <ul class="checklist">
+                <li>Performans artışı görülür.</li>
+                <li>Yavaşlama hissi azalmaya başlar.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Güvenli Kullanım</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag primary">Önlem</span>
+              <div class="code">- ADB komutları dikkatli uygulanır
+- sistem servisleri bilinçli şekilde kapatılır
+- üretici uygulamalar silinmeden önce kontrol edilir</div>
+              <ul class="checklist">
+                <li>Yalnızca kullanıcı kontrolünde çalışır.</li>
+                <li>Sistem dosyaları zarar görmez.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="other-panel">
+        <div class="grid-4">
+          <article class="card">
+            <div class="card-head">
+              <h3>Android Genel</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag primary">Genel</span>
+              <div class="code">adb shell settings put global transition_animation_scale 0
+adb shell settings put global window_animation_scale 0
+adb shell settings put global animator_duration_scale 0
+adb shell pm trim-caches 8000</div>
+              <ul class="checklist">
+                <li>Temel optimizasyon sağlar.</li>
+                <li>Animasyonlar düşer.</li>
+                <li>Hafıza kullanımı azalır.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Uygulama Kapatma</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag green">Yönetim</span>
+              <div class="code">Ayarlar > Uygulamalar > Uygulama Yöneticisi
+- gereksiz uygulamalar kapat
+- otomatik başlatma ve arka plan izinleri kısıtla</div>
+              <ul class="checklist">
+                <li>RAM baskısı azalır.</li>
+                <li>Geçişler daha hızlı olur.</li>
+                <li>Günlük akış iyileşir.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Temizlik</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag gold">Önlem</span>
+              <div class="code">- gereksiz dosyaları temizle
+- büyük fotoğraf/video dosyalarını buluta aktar
+- sık kullanılan uygulamaları ön plana al</div>
+              <ul class="checklist">
+                <li>Depolama düzenli kalır.</li>
+                <li>Hafıza kullanımında azalma olur.</li>
+                <li>İşletim sistemi daha hafif çalışır.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Diğer Sonuç</h3>
+            </div>
+            <div class="card-body">
+              <span class="tag primary">Netice</span>
+              <div class="code">Sonuç:
+- RAM artışı fiziksel olarak olmaz
+- kullanılabilir hafıza mantıklı şekilde artar
+- uygulama geçişleri daha hızlıdır</div>
+              <ul class="checklist">
+                <li>Performans iyileşir.</li>
+                <li>Akıcılık artar.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Adım adım doğru kullanım rehberi</h2>
+        <p>RAM artırma işini yanlış yapmadan, güvenli şekilde nasıl optimize edersiniz?</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Önce what is RAM?</h3>
+          <p>RAM, cihazın anlık çalışma belleğidir. Fiziksel olarak artırılmaz, ama kullanılan alan azaltılabilir.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Arka plan uygulamaları kapat</h3>
+          <p>Uygulamaları arka planda çalıştırmak hafızayı doldurur. Kapatma işlemi performansı iyileştirir.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Önbellek ve gereksiz dosya temizliği</h3>
+          <p>Depolama ve önbellek temizliği, cihazın daha hafif çalışmasını sağlar ve donma hissini azaltır.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Animasyonları düşür</h3>
+          <p>Animasyonların kapatılması uygulama geçişlerinin hızlanmasını sağlar. Görsel olarak daha hızlı uygula hissi verir.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="highlight" id="results">
+      <div class="section-head">
+        <h2>Genel sonuç tablosu</h2>
+        <p>Farklı cihaz türlerinde en etkili yöntemler ve beklenen sonuçlar.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Cihaz</th>
+              <th>Yöntem</th>
+              <th>Beklenen Sonuç</th>
+              <th>Durum</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Samsung</td>
+              <td>ADB animasyon kapatma + önbellek temizleme + arka plan kapatma</td>
+              <td>Akıcılık artar, RAM baskısı azalır</td>
+              <td><span class="badge good">Başarılı</span></td>
+            </tr>
+            <tr>
+              <td>iPhone</td>
+              <td>Arka plan yenileme kapatma + depolama temizliği + pil ayarları</td>
+              <td>Daha hafif ve daha akıcı sistem</td>
+              <td><span class="badge good">Başarılı</span></td>
+            </tr>
+            <tr>
+              <td>Redmi</td>
+              <td>ADB + arka plan kısıtlaması + otomatik başlatma kapatma</td>
+              <td>Performans artışı ve daha az kaynak tüketimi</td>
+              <td><span class="badge good">Başarılı</span></td>
+            </tr>
+            <tr>
+              <td>Diğer Android</td>
+              <td>Animasyon düşürme + gereksiz uygulama kontrolü</td>
+              <td>RAM kullanılabilirliği iyileşir</td>
+              <td><span class="badge warn">Etkili</span></td>
+            </tr>
+            <tr>
+              <td>Hepsi</td>
+              <td>Gerçek “RAM artırma” değil, optimizasyon</td>
+              <td>Performans artışı olur, fiziksel RAM artışı olmaz</td>
+              <td><span class="badge bad">Doğru Yapı</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Güvenlik ve uyarılar</h2>
+        <p>RAM optimizasyonu doğru yapılmalıdır; yanlış adımlar sisteminize zarar verebilir.</p>
+      </div>
+
+      <div class="grid-4">
+        <div class="card">
+          <div class="card-head">
+            <h3>Uyarı: ADB</h3>
+          </div>
+          <div class="card-body">
+            <span class="tag gold">Dikkat</span>
+            <ul class="checklist">
+              <li>ADB komutları sadece bilinçli şekilde çalıştırılmalıdır.</li>
+              <li>Sistem servisleri kapatılırken dikkatli olunmalıdır.</li>
+              <li>Yanlış komutlar cihazı olumsuz etkileyebilir.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>Uyarı: Kaldırma</h3>
+          </div>
+          <div class="card-body">
+            <span class="tag green">Güvenlik</span>
+            <ul class="checklist">
+              <li>Üretici uygulamalar kaldırılmadan önce kontrol edilmelidir.</li>
+              <li>Önemli sistem bileşenleri silinmemelidir.</li>
+              <li>Yalnızca kullanıcı bilinçli şekilde işlemi yapmalıdır.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>Uyarı: Hızlandırma</h3>
+          </div>
+          <div class="card-body">
+            <span class="tag primary">Optimizasyon</span>
+            <ul class="checklist">
+              <li>Animasyonları düşürmek verimli olur.</li>
+              <li>Fakat aşırı ayar değişikliği sistem davranışını bozabilir.</li>
+              <li>Her cihazın ayarları farklıdır.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>Uyarı: Gerçekleşen</h3>
+          </div>
+          <div class="card-body">
+            <span class="tag gold">Netlik</span>
+            <ul class="checklist">
+              <li>Fiziksel RAM artışı olmaz.</li>
+              <li>Performansı iyileştirme amaçlı optimizasyon yapılır.</li>
+              <li>Yani fark hissedilir ama cihazın donanımı değişmez.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="section-head">
+        <h2>Sık sorulan sorular</h2>
+      </div>
+
+      <div class="faq">
+        <div class="faq-item">
+          <h3>Gerçekten RAM artırılır mı?</h3>
+          <p>Fiziksel olarak hayır. Ama kullanılabilir bellek boşaltılarak cihaz daha hızlı çalıştırılabilir.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>ADB komutları güvenli mi?</h3>
+          <p>Evet, ama yalnızca bilinçli ve kontrollü şekilde uygulanmalıdır. Özellikle sistem servisleri kapatılırken dikkatli olunmalıdır.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>iPhone’da RAM artırma yapılabilir mi?</h3>
+          <p>Fiziksel olarak hayır. Fakat arka plan yenileme kapatma, depolama temizliği ve ayar optimizasyonu performansı iyileştirir.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Redmi için en etkili yöntem nedir?</h3>
+          <p>Arka plan kısıtlaması, otomatik başlatma kapatma ve animasyon düşürme bir arada kullanıldığında en iyi sonuç alınır.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Samsung’da ne kadar fark olur?</h3>
+          <p>Önceki yükün azaltılmasıyla uygulama açılışları daha hızlı olur. Özellikle animasyonların kapatılması belirgin fark yaratır.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Genel olarak etki ne kadar sürer?</h3>
+          <p>Kısa vadede anında fark hissedilir. Uzun vadede veri ve sistem temizliği düzenli yapıldığında daha kalıcı etkiler görülür.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 SetEdit • Eğitim amaçlı hazırlanmıştır. RAM artırma donanımsal olarak mümkün değildir; ancak performans optimizasyonu yapılabilir.
+    </div>
+  </footer>
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        tabPanels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        const target = document.getElementById(btn.dataset.tab + '-panel');
+        if (target) target.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

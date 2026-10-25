@@ -8,14 +8,45 @@ tabButtons.forEach((button) => {
 
     button.classList.add('active');
     const target = document.getElementById(`${button.dataset.tab}-panel`);
-    if (target) {
-      target.classList.add('active');
+    if (target) target.classList.add('active');
+  });
+});
+
+const sidebarButtons = document.querySelectorAll('.sidebar-btn');
+const commandPanels = document.querySelectorAll('.command-panel');
+
+sidebarButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    sidebarButtons.forEach((btn) => btn.classList.remove('active'));
+    commandPanels.forEach((panel) => panel.classList.remove('active'));
+
+    button.classList.add('active');
+    const target = document.querySelector(`.command-panel[data-panel="${button.dataset.command}"]`);
+    if (target) target.classList.add('active');
+  });
+});
+
+const copyButtons = document.querySelectorAll('.command-row button');
+copyButtons.forEach((button) => {
+  button.addEventListener('click', async () => {
+    const text = button.parentElement.querySelector('span').textContent;
+    try {
+      await navigator.clipboard.writeText(text);
+      const original = button.textContent;
+      button.textContent = 'Kopyalandı';
+      setTimeout(() => {
+        button.textContent = original;
+      }, 1200);
+    } catch (error) {
+      button.textContent = 'Hata';
+      setTimeout(() => {
+        button.textContent = 'Kopyala';
+      }, 1200);
     }
   });
 });
 
 const revealItems = document.querySelectorAll('.reveal');
-
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -28,3 +59,13 @@ const observer = new IntersectionObserver(
 );
 
 revealItems.forEach((item) => observer.observe(item));
+
+const playButton = document.querySelector('.play-btn');
+if (playButton) {
+  playButton.addEventListener('click', () => {
+    playButton.textContent = '✓';
+    setTimeout(() => {
+      playButton.textContent = '▶';
+    }, 1200);
+  });
+}

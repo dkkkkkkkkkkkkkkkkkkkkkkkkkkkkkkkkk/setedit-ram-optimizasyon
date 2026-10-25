@@ -7,14 +7,14 @@ Bu repo, Samsung, iPhone, Redmi ve diğer cihazlar için RAM artırma ve perform
 - iPhone için arka plan yenileme ve depolama optimizasyonu
 - Redmi / Xiaomi için arka plan kısıtlaması ve akıcılık ayarları
 - Genel Android ve güvenlik uyarıları
-- Sonuç tablosu ve sık sorulan sorular (SSS)
-- Modern tasarım, tablar, SVG görseller ve animasyonlu efektler
+- Sonuç tablosu, komut kütüphanesi ve sık sorulan sorular
+- Modern tasarım, karanlık tema, animasyonlar ve SVG görseller
 
 ## Dosya yapısı
 - `index.html` — ana web sayfası
 - `styles.css` — stil ve tasarım dosyası
-- `script.js` — tab geçişleri ve görünüm animasyonları
-- `assets/` — favicon ve cihaz görselleri
+- `script.js` — etkileşimler, sekmeler ve animasyonlar
+- `assets/` — favicon, ikonlar ve görseller
 
 ## Çalıştırma
 Aynı klasördeki `index.html` dosyasını tarayıcıda açmanız yeterlidir.

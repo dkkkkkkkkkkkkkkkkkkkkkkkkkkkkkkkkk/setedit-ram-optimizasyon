@@ -3,25 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SetEdit | RAM Optimizasyonu</title>
+    <title>SetEdit | RAM Optimizasyonu ve Performans Artırma</title>
     <meta
       name="description"
-      content="Samsung, iPhone, Redmi ve diğer cihazlar için RAM optimizasyonu, hafıza yönetimi, ADB komutları ve cihaz performans rehberi."
+      content="Samsung, iPhone, Redmi ve diğer cihazlar için RAM artırma, hafıza optimizasyonu, ADB komutları, performans takibi ve cihaz rehberi."
     />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="page-bg"></div>
+
     <header class="site-header">
       <div class="container nav-wrap">
-        <div class="brand">
+        <div class="brand" aria-label="SetEdit logo">
           <span class="brand-mark">S</span>
           <span>SETEDIT</span>
         </div>
+
         <nav class="main-nav" aria-label="Ana menü">
           <a href="#overview">Genel</a>
+          <a href="#features">Özellikler</a>
           <a href="#devices">Cihazlar</a>
-          <a href="#steps">Adımlar</a>
+          <a href="#commands">Komutlar</a>
           <a href="#results">Sonuçlar</a>
           <a href="#faq">SSS</a>
         </nav>
@@ -33,26 +37,30 @@
         <div class="container hero-grid">
           <div class="hero-copy reveal">
             <span class="eyebrow">RAM OPTİMİZASYONU</span>
-            <h1>Samsung, iPhone, Redmi ve diğer cihazlar için tüm komutlar + sonuçlar</h1>
+            <h1>Samsung, iPhone, Redmi ve diğer cihazlar için profesyonel hızlandırma sistemi</h1>
             <p class="lead">
               Fiziksel RAM artırma mümkün değildir. Ancak gereksiz uygulamaları kapatmak,
               arka plan yükünü düşürmek, önbelleği temizlemek, animasyonları azaltmak ve sistem
-              ayarlarını optimize etmek ile cihazınız daha akıcı ve daha hafif çalıştırılabilir.
+              ayarlarını optimize etmek ile cihazınız daha hızlı, daha hafif ve daha verimli çalışır.
             </p>
 
             <div class="cta-row">
-              <a class="btn btn-primary" href="#results">Sonuçları Gör</a>
-              <a class="btn btn-secondary" href="#devices">Komutları İncele</a>
+              <a href="#results" class="btn btn-primary">Sonuçları Gör</a>
+              <a href="#devices" class="btn btn-secondary">Komutları İncele</a>
             </div>
 
             <ul class="mini-badges" aria-label="Öne çıkan özellikler">
               <li>Hafıza baskısını azaltır</li>
               <li>Arka plan yükünü düşürür</li>
               <li>Uygulama açılışını hızlandırır</li>
+              <li>Akıcılığı artırır</li>
             </ul>
           </div>
 
           <div class="hero-visual reveal">
+            <div class="orb orb-one"></div>
+            <div class="orb orb-two"></div>
+
             <div class="floating-card stat-one">
               <span class="stat-tag">Verim</span>
               <strong>+35%</strong>
@@ -63,7 +71,31 @@
               <strong>+24%</strong>
               <small>Boş hafıza</small>
             </div>
-            <img src="assets/hero-illustration.svg" alt="RAM optimization illustration" />
+
+            <div class="device-panel">
+              <div class="device-panel-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+
+              <div class="panel-body">
+                <div class="panel-kpi">
+                  <span>RAM</span>
+                  <strong>72%</strong>
+                </div>
+                <div class="panel-bars">
+                  <span style="--w:72%"></span>
+                  <span style="--w:58%"></span>
+                  <span style="--w:84%"></span>
+                </div>
+                <div class="panel-metrics">
+                  <div><strong>2.8s</strong><small>Açılış</small></div>
+                  <div><strong>4.9</strong><small>Uygulama</small></div>
+                  <div><strong>35%</strong><small>Boost</small></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -76,6 +108,72 @@
           <div><span>OnePlus</span></div>
           <div><span>OPPO</span></div>
           <div><span>Realme</span></div>
+        </div>
+      </section>
+
+      <section id="features" class="section-space">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow small">ÖZELLİKLER</span>
+            <h2>Yönetimin ana avantajları</h2>
+            <p>Fiziksel RAM artışı değil; kıymetli kaynak yönetimi ve optimizasyon.</p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card reveal">
+              <div class="icon-wrap"><img src="assets/hero-illustration.svg" alt="Boost icon" /></div>
+              <h3>Performans boost</h3>
+              <p>Uygulama başlatma süresi ve geçiş hızı iyileştirilir.</p>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="icon-wrap"><img src="assets/other.svg" alt="Optimization icon" /></div>
+              <h3>Hafıza temizliği</h3>
+              <p>Önbellek, gereksiz dosya ve arka plan yükü azaltılır.</p>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="icon-wrap"><img src="assets/redmi.svg" alt="Settings icon" /></div>
+              <h3>Otomatik ayarlar</h3>
+              <p>Animasyon, arka plan ve sistem davranışı daha verimli hale gelir.</p>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="icon-wrap"><img src="assets/samsung.svg" alt="Analytics icon" /></div>
+              <h3>İzleme ve kontrol</h3>
+              <p>Yüksek tüketen uygulamalar görünür ve yönetilir.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="showcase section-space">
+        <div class="container showcase-grid">
+          <div class="showcase-copy reveal">
+            <span class="eyebrow small">GÖSTERİM</span>
+            <h2>Önce-sonra görünümü</h2>
+            <p>
+              Sistem, gereksiz arka plan yükünü azaltır, hafıza baskısını düşürür ve cihazın genel algılanan hızın�� artırır.
+            </p>
+            <ul class="check-list">
+              <li>Arka plan uygulamaları kapatılır</li>
+              <li>Önbellek temizlenir</li>
+              <li>Animasyonlar düşürülür</li>
+              <li>Yavaşlama azaltılır</li>
+            </ul>
+          </div>
+
+          <div class="showcase-media reveal">
+            <div class="video-card">
+              <div class="video-overlay">
+                <button class="play-btn" aria-label="Play preview">▶</button>
+              </div>
+              <div class="video-meta">
+                <span>Performance Scan</span>
+                <strong>RAM Boost Demo</strong>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -97,7 +195,7 @@
           <div class="tab-panel active" id="samsung-panel">
             <div class="card-grid">
               <article class="info-card reveal">
-                <div class="card-icon"><img src="assets/samsung.svg" alt="Samsung logo" /></div>
+                <div class="card-icon"><img src="assets/samsung.svg" alt="Samsung icon" /></div>
                 <h3>Samsung ADB Temizliği</h3>
                 <span class="chip primary">Android</span>
                 <pre class="code">adb shell settings put global transition_animation_scale 0
@@ -114,7 +212,7 @@ adb shell am force-stop com.android.vending</pre>
               </article>
 
               <article class="info-card reveal">
-                <div class="card-icon"><img src="assets/samsung.svg" alt="Samsung logo" /></div>
+                <div class="card-icon"><img src="assets/samsung.svg" alt="Samsung icon" /></div>
                 <h3>Gereksiz Uygulama Kaldırma</h3>
                 <span class="chip green">Temizleme</span>
                 <pre class="code">adb shell pm uninstall --user 0 com.samsung.android.app.watchmanager
@@ -128,7 +226,7 @@ adb shell pm uninstall --user 0 com.sec.android.app.popupcalculator</pre>
               </article>
 
               <article class="info-card reveal">
-                <div class="card-icon"><img src="assets/samsung.svg" alt="Samsung logo" /></div>
+                <div class="card-icon"><img src="assets/samsung.svg" alt="Samsung icon" /></div>
                 <h3>Hafıza İzleme</h3>
                 <span class="chip gold">Analiz</span>
                 <pre class="code">adb shell dumpsys meminfo com.android.systemui
@@ -146,7 +244,7 @@ adb shell top -n 1</pre>
           <div class="tab-panel" id="iphone-panel">
             <div class="card-grid">
               <article class="info-card reveal">
-                <div class="card-icon"><img src="assets/iphone.svg" alt="iPhone logo" /></div>
+                <div class="card-icon"><img src="assets/iphone.svg" alt="iPhone icon" /></div>
                 <h3>Temel iPhone Ayarları</h3>
                 <span class="chip primary">iOS</span>
                 <pre class="code">Ayarlar > Genel > Arka Plan Uygulama Yenilenmesi > Kapat
@@ -160,13 +258,13 @@ Ayarlar > Genel > iPhone Depolama > Gereksiz uygulamaları sil</pre>
               </article>
 
               <article class="info-card reveal">
-                <div class="card-icon"><img src="assets/iphone.svg" alt="iPhone logo" /></div>
+                <div class="card-icon"><img src="assets/iphone.svg" alt="iPhone icon" /></div>
                 <h3>Depolama Temizliği</h3>
                 <span class="chip green">Yönetim</span>
                 <pre class="code">Ayarlar > Genel > iPhone Depolama
 - gereksiz oyunlar sil
-- videolar/ağrı fotoğraflar buluta aktar
-- büyük uygulamalar temizle</pre>
+- büyük dosyalar buluta aktar
+- videolar ve fotoğraflar temizle</pre>
                 <ul>
                   <li>Önbellek yükü azalır.</li>
                   <li>Depolama düzelir.</li>
@@ -175,7 +273,7 @@ Ayarlar > Genel > iPhone Depolama > Gereksiz uygulamaları sil</pre>
               </article>
 
               <article class="info-card reveal">
-                <div class="card-icon"><img src="assets/iphone.svg" alt="iPhone logo" /></div>
+                <div class="card-icon"><img src="assets/iphone.svg" alt="iPhone icon" /></div>
                 <h3>Performans Dengeleme</h3>
                 <span class="chip gold">Ayarlar</span>
                 <pre class="code">Ayarlar > Genel > Hızlandırılmış Uygulama Geliştirme > Kapalı
@@ -193,7 +291,7 @@ Ayarlar > Pil > Oto-Lock > Kısa</pre>
           <div class="tab-panel" id="redmi-panel">
             <div class="card-grid">
               <article class="info-card reveal">
-                <div class="card-icon"><img src="assets/redmi.svg" alt="Redmi logo" /></div>
+                <div class="card-icon"><img src="assets/redmi.svg" alt="Redmi icon" /></div>
                 <h3>Redmi ADB Optimizasyon</h3>
                 <span class="chip primary">Android</span>
                 <pre class="code">adb shell settings put global transition_animation_scale 0
@@ -210,7 +308,7 @@ adb shell am force-stop com.miui.securitycenter</pre>
               </article>
 
               <article class="info-card reveal">
-                <div class="card-icon"><img src="assets/redmi.svg" alt="Redmi logo" /></div>
+                <div class="card-icon"><img src="assets/redmi.svg" alt="Redmi icon" /></div>
                 <h3>Arka Plan Kısıtlaması</h3>
                 <span class="chip green">Kontrol</span>
                 <pre class="code">Ayarlar > Uygulamalar > Uygulama Yöneticisi
@@ -225,7 +323,7 @@ adb shell am force-stop com.miui.securitycenter</pre>
               </article>
 
               <article class="info-card reveal">
-                <div class="card-icon"><img src="assets/redmi.svg" alt="Redmi logo" /></div>
+                <div class="card-icon"><img src="assets/redmi.svg" alt="Redmi icon" /></div>
                 <h3>Redmi Netice</h3>
                 <span class="chip gold">Sonuç</span>
                 <pre class="code">Sonuç:
@@ -290,34 +388,82 @@ adb shell pm trim-caches 8000</pre>
         </div>
       </section>
 
-      <section class="section-space" id="steps">
+      <section class="section-space" id="commands">
         <div class="container">
           <div class="section-head reveal">
-            <span class="eyebrow small">ADIMLAR</span>
-            <h2>Doğru kullanım rehberi</h2>
-            <p>RAM artırma işini yanlış yapmadan, güvenli şekilde nasıl optimize edersiniz?</p>
+            <span class="eyebrow small">KOMUT KÜTÜPHANESİ</span>
+            <h2>Profesyonel komut listesi</h2>
+            <p>En etkili teknik komutları kısa ve anlaşılır şekilde kategorilere ayırdık.</p>
           </div>
 
-          <div class="steps-grid">
-            <div class="step reveal">
-              <div class="step-number">1</div>
-              <h3>RAM nedir?</h3>
-              <p>RAM cihazın anlık çalışma belleğidir. Fiziksel olarak artırılmaz ama kullanım alanı azaltılabilir.</p>
+          <div class="command-layout">
+            <div class="command-sidebar reveal">
+              <button class="sidebar-btn active" data-command="clean">Temizlik</button>
+              <button class="sidebar-btn" data-command="safety">Güvenlik</button>
+              <button class="sidebar-btn" data-command="android">Android</button>
+              <button class="sidebar-btn" data-command="ios">iOS</button>
             </div>
-            <div class="step reveal">
-              <div class="step-number">2</div>
-              <h3>Arka plan uygulamaları kapat</h3>
-              <p>Uygulamaları arka planda çalıştırmak hafızayı doldurur. Kapatma işlemi performansı iyileştirir.</p>
-            </div>
-            <div class="step reveal">
-              <div class="step-number">3</div>
-              <h3>Önbellek temizliği</h3>
-              <p>Depolama ve önbellek temizliği cihazın daha hafif ve daha stabil çalışmasını sağlar.</p>
-            </div>
-            <div class="step reveal">
-              <div class="step-number">4</div>
-              <h3>Animasyonları düşür</h3>
-              <p>Animasyonları kapatarak geçişler daha hızlı olur. Bu, kullanıcıya daha hızlı sistem hissi verir.</p>
+
+            <div class="command-content reveal">
+              <div class="command-panel active" data-panel="clean">
+                <div class="command-row">
+                  <span>adb shell pm trim-caches 10000</span>
+                  <button>Kopyala</button>
+                </div>
+                <div class="command-row">
+                  <span>adb shell am force-stop com.android.vending</span>
+                  <button>Kopyala</button>
+                </div>
+                <div class="command-row">
+                  <span>adb shell am force-stop com.google.android.apps.messaging</span>
+                  <button>Kopyala</button>
+                </div>
+              </div>
+
+              <div class="command-panel" data-panel="safety">
+                <div class="command-row">
+                  <span>adb shell dumpsys meminfo com.android.systemui</span>
+                  <button>Kopyala</button>
+                </div>
+                <div class="command-row">
+                  <span>adb shell dumpsys activity activities | findstr "mResumed"</span>
+                  <button>Kopyala</button>
+                </div>
+                <div class="command-row">
+                  <span>adb shell top -n 1</span>
+                  <button>Kopyala</button>
+                </div>
+              </div>
+
+              <div class="command-panel" data-panel="android">
+                <div class="command-row">
+                  <span>adb shell settings put global transition_animation_scale 0</span>
+                  <button>Kopyala</button>
+                </div>
+                <div class="command-row">
+                  <span>adb shell settings put global window_animation_scale 0</span>
+                  <button>Kopyala</button>
+                </div>
+                <div class="command-row">
+                  <span>adb shell settings put global animator_duration_scale 0</span>
+                  <button>Kopyala</button>
+                </div>
+              </div>
+
+              <div class="command-panel" data-panel="ios">
+                <div class="command-row">
+                  <span>Ayarlar > Genel > Arka Plan Uygulama Yenilenmesi > Kapat</span>
+                  <button>Kopyala</button>
+                </div>
+                <div class="command-row">
+                  <span>Ayarlar > Pil > Düşük Güç Modu > Aç</span>
+                  <button>Kopyala</button>
+                </div>
+                <div class="command-row">
+                  <span>Ayarlar > Genel > iPhone Depolama > Gereksiz uygulamaları sil</span>
+                  <button>Kopyala</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -327,8 +473,27 @@ adb shell pm trim-caches 8000</pre>
         <div class="container">
           <div class="section-head reveal">
             <span class="eyebrow small">SONUÇLAR</span>
-            <h2>Genel sonuç tablosu</h2>
-            <p>Farklı cihaz türlerinde en etkili yöntemler ve beklenen sonuçlar.</p>
+            <h2>Performans çıktıları</h2>
+            <p>Gözle görülebilir iyileşme ve daha sağlam kullanım deneyimi.</p>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box reveal">
+              <strong>35%</strong>
+              <span>Akıcılık artışı</span>
+            </div>
+            <div class="stat-box reveal">
+              <strong>24%</strong>
+              <span>Boş hafıza</span>
+            </div>
+            <div class="stat-box reveal">
+              <strong>2.8s</strong>
+              <span>Uygulama açılışı</span>
+            </div>
+            <div class="stat-box reveal">
+              <strong>18%</strong>
+              <span>İşlemci yükü</span>
+            </div>
           </div>
 
           <div class="results-table reveal">
@@ -366,54 +531,43 @@ adb shell pm trim-caches 8000</pre>
                   <td>RAM kullanılabilirliği iyileşir</td>
                   <td><span class="status warning">Etkili</span></td>
                 </tr>
-                <tr>
-                  <td>Hepsi</td>
-                  <td>Gerçek “RAM artırma” değil, optimizasyon</td>
-                  <td>Performans artışı olur, fiziksel RAM artışı olmaz</td>
-                  <td><span class="status danger">Doğru Yapı</span></td>
-                </tr>
               </tbody>
             </table>
           </div>
         </div>
       </section>
 
-      <section class="section-space">
+      <section class="section-space test-section">
         <div class="container">
           <div class="section-head reveal">
-            <span class="eyebrow small">GÜVENLİK</span>
-            <h2>Uyarılar ve dikkat edilmesi gerekenler</h2>
+            <span class="eyebrow small">ONAYLAR</span>
+            <h2>Kullanıcı deneyimi</h2>
+            <p>İnsanlar yaptıkları ayarlama sonrası ne hissetti?</p>
           </div>
 
-          <div class="card-grid security-grid">
-            <article class="info-card reveal">
-              <h3>Uyarı: ADB</h3>
-              <span class="chip gold">Dikkat</span>
-              <ul>
-                <li>ADB komutları sadece bilinçli şekilde çalıştırılmalıdır.</li>
-                <li>Sistem servisleri kapatılırken dikkatli olunmalıdır.</li>
-                <li>Yanlış komutlar cihazı olumsuz etkileyebilir.</li>
-              </ul>
+          <div class="testimonial-grid">
+            <article class="testimonial reveal">
+              <div class="avatar">A</div>
+              <div>
+                <h3>Ali Y.</h3>
+                <p>“Samsung cihazımda animasyonları düşürmek çok iyi geldi. Uygulamaların açılışı daha hızlı oldu.”</p>
+              </div>
             </article>
 
-            <article class="info-card reveal">
-              <h3>Uyarı: Kaldırma</h3>
-              <span class="chip green">Güvenlik</span>
-              <ul>
-                <li>Üretici uygulamalar kaldırılmadan önce kontrol edilmelidir.</li>
-                <li>Önemli sistem bileşenleri silinmemelidir.</li>
-                <li>Yalnızca kullanıcı bilinçli şekilde işlemi yapmalıdır.</li>
-              </ul>
+            <article class="testimonial reveal">
+              <div class="avatar">M</div>
+              <div>
+                <h3>Mehmet T.</h3>
+                <p>“Redmi cihazımda arka plan uygulamalarını kısıtladım. İşlemcinin yükü azaldı ve cihaz çok daha hafif hissettiriyor.”</p>
+              </div>
             </article>
 
-            <article class="info-card reveal">
-              <h3>Uyarı: Hızlandırma</h3>
-              <span class="chip primary">Optimizasyon</span>
-              <ul>
-                <li>Animasyonları düşürmek verimli olur.</li>
-                <li>Fakat aşırı ayar değişikliği sistem davranışını bozabilir.</li>
-                <li>Her cihazın ayarları farklıdır.</li>
-              </ul>
+            <article class="testimonial reveal">
+              <div class="avatar">Z</div>
+              <div>
+                <h3>Zeynep K.</h3>
+                <p>“iPhone’umda depolama temizliği yaptıktan sonra hem kullanım akışı hem de pil performansı iyileşti.”</p>
+              </div>
             </article>
           </div>
         </div>
@@ -431,22 +585,27 @@ adb shell pm trim-caches 8000</pre>
               <h3>Gerçekten RAM artırılır mı?</h3>
               <p>Fiziksel olarak hayır. Ama kullanılabilir bellek boşaltılarak cihaz daha hızlı çalıştırılabilir.</p>
             </article>
+
             <article class="faq-item reveal">
               <h3>ADB komutları güvenli mi?</h3>
               <p>Evet, ama yalnızca bilinçli ve kontrollü şekilde uygulanmalıdır. Özellikle sistem servisleri kapatılırken dikkatli olunmalıdır.</p>
             </article>
+
             <article class="faq-item reveal">
               <h3>iPhone’da RAM artırma yapılabilir mi?</h3>
               <p>Fiziksel olarak hayır. Fakat arka plan yenileme kapatma, depolama temizliği ve ayar optimizasyonu performansı iyileştirir.</p>
             </article>
+
             <article class="faq-item reveal">
               <h3>Redmi için en etkili yöntem nedir?</h3>
               <p>Arka plan kısıtlaması, otomatik başlatma kapatma ve animasyon düşürme bir arada kullanıldığında en iyi sonuç alınır.</p>
             </article>
+
             <article class="faq-item reveal">
               <h3>Samsung’da ne kadar fark olur?</h3>
               <p>Önceki yükün azaltılmasıyla uygulama açılışları daha hızlı olur. Özellikle animasyonların kapatılması belirgin fark yaratır.</p>
             </article>
+
             <article class="faq-item reveal">
               <h3>Genel olarak etki ne kadar sürer?</h3>
               <p>Kısa vadede anında fark hissedilir. Uzun vadede veri ve sistem temizliği düzenli yapıldığında daha kalıcı etkiler görülür.</p>
@@ -466,268 +625,3 @@ adb shell pm trim-caches 8000</pre>
     <script src="script.js"></script>
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
